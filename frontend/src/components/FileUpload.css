@@ -1,0 +1,54 @@
+.file-upload-container {
+  margin: 2rem 0;
+}
+
+.file-upload-area {
+  border: 3px dashed #667eea;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.file-upload-area:hover {
+  border-color: #764ba2;
+  background: rgba(102, 126, 234, 0.1);
+  transform: scale(1.02);
+}
+
+.file-upload-area.drag-active {
+  border-color: #764ba2;
+  background: rgba(118, 75, 162, 0.1);
+  transform: scale(1.02);
+}
+
+.upload-icon {
+  color: #667eea;
+  margin-bottom: 1rem;
+}
+
+.file-selected .file-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.file-selected .file-hint {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.file-prompt .upload-text {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.file-prompt .upload-hint {
+  color: #666;
+  font-size: 0.9rem;
+}

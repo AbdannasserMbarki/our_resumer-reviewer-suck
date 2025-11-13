@@ -1,0 +1,95 @@
+.score-card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.score-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.score-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 8px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.score-number {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.score-breakdown h3 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.breakdown-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.breakdown-item {
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.breakdown-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.breakdown-bar {
+  height: 24px;
+  background: #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.breakdown-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+  border-radius: 12px;
+}
+
+.breakdown-score {
+  font-weight: 600;
+  color: #666;
+  min-width: 50px;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .score-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .breakdown-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .breakdown-score {
+    text-align: left;
+  }
+}

@@ -1,0 +1,72 @@
+
+pdfplumber==0.10.3
+Purpose: Extract text from PDF files
+Used in: resume_parser.py
+Why: Better text extraction than PyPDF2, handles tables and layouts well
+Use case: Reading resume content from PDF uploads
+
+
+PyPDF2==3.0.1
+Purpose: PDF manipulation and sanitization
+Used in: pdf_validator.py
+Why: Removes malicious JavaScript, scripts, and embedded files from PDFs
+Use case: Security - sanitizing PDFs before processing to prevent attacks
+
+
+python-docx==1.1.0
+Purpose: Read and write Microsoft Word (.docx) files
+Used in: resume_parser.py
+Why: Extract text from Word document resumes
+Use case: Parsing .docx resume uploads
+
+
+spacy==3.7.2
+Purpose: Advanced Natural Language Processing (NLP) library
+Used in: nlp_analyzer.py (optional)
+Why: Named entity recognition, part-of-speech tagging, linguistic analysis
+Use case: Analyzing resume text structure, identifying skills, entities
+Note: Requires language model download: python -m spacy download en_core_web_sm
+
+
+nltk==3.8.1
+Purpose: Natural Language Toolkit for text processing
+Used in: nlp_analyzer.py (alternative to spaCy)
+Why: Tokenization, stemming, stopword removal, text analysis
+Use case: Analyzing bullet points, detecting patterns in resume text
+
+
+
+scikit-learn==1.3.2
+Purpose: Machine Learning library
+Used in: bullet_classifier.py
+Why: TF-IDF vectorization, Naive Bayes classifier for P(Strong) and P(Relevant)
+Use case: Classifying bullet point strength and relevance to job descriptions
+
+
+numpy==1.26.2
+Purpose: Numerical computing library
+Used in: Support library for scikit-learn
+Why: Array operations, mathematical functions
+Use case: Backend for ML calculations and data manipulation
+
+
+Pillow==10.1.0
+Purpose: Image processing library
+Used in: pdf_validator.py
+Why: Detect image-based PDFs (scanned documents)
+Use case: Identifying if a PDF is image-based vs text-based, rejecting scanned resumes
+
+
+Your Application
+    ├── Text Extraction
+    │   ├── pdfplumber (PDF text)
+    │   └── python-docx (DOCX text)
+    │
+    ├── Security
+    │   ├── PyPDF2 (PDF sanitization)
+    │   └── Pillow (image detection)
+    │
+    └── NLP/ML Analysis
+        ├── spacy or nltk (text analysis)
+        ├── scikit-learn (ML classifiers)
+        └── numpy (numerical operations)
