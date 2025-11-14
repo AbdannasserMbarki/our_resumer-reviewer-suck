@@ -3,6 +3,8 @@ const router = express.Router();
 const upload = require('../middleware/upload');
 const pythonService = require('../services/pythonService');
 const fileCleanup = require('../services/fileCleanup');
+const { uploadLimiter, heavyOperationLimiter } = require('../middleware/rateLimiter');
+const { logger, performanceLogger, logError } = require('../services/logger');
 const path = require('path');
 
 // Start periodic cleanup of temp files (every 30 minutes, delete files older than 1 hour)
@@ -13,8 +15,9 @@ fileCleanup.startPeriodicCleanup(tempDir, 1800000, 3600000);
  * POST /api/resume/score
  * Upload and score resume
  */
-router.post('/score', upload.single('resume'), async (req, res) => {
+router.post('/score', uploadLimiter, heavyOperationLimiter, upload.single('resume'), async (req, res) => {
   let filePath = null;
+  const timer = performanceLogger.startTimer('resume_scoring');
   
   try {
     if (!req.file) {
@@ -72,6 +75,7 @@ router.post('/score', upload.single('resume'), async (req, res) => {
     await fileCleanup.deleteFile(filePath);
 
     // Return results
+    console.log('Python script result:', scoreResult);
     res.json({
       success: true,
       data: {
@@ -79,8 +83,13 @@ router.post('/score', upload.single('resume'), async (req, res) => {
         text: parsedResume.text,
         score: scoreResult.score,
         breakdown: scoreResult.breakdown,
+        detailed_feedback: scoreResult.detailed_feedback,
+        performance_tier: scoreResult.performance_tier,
         feedback: scoreResult.feedback,
-        recommendations: scoreResult.recommendations
+        recommendations: scoreResult.recommendations,
+        resume_content: scoreResult.resume_content || parsedResume.text,
+        statistics: scoreResult.statistics,
+        enhanced_analysis: scoreResult.enhanced_analysis
       }
     });
 
@@ -103,7 +112,7 @@ router.post('/score', upload.single('resume'), async (req, res) => {
  * POST /api/resume/target
  * Match resume to job description
  */
-router.post('/target', upload.single('resume'), async (req, res) => {
+router.post('/target', uploadLimiter, heavyOperationLimiter, upload.single('resume'), async (req, res) => {
   let filePath = null;
   
   try {
@@ -187,7 +196,7 @@ router.post('/target', upload.single('resume'), async (req, res) => {
  * POST /api/resume/improve
  * Get improvement suggestions for resume
  */
-router.post('/improve', upload.single('resume'), async (req, res) => {
+router.post('/improve', uploadLimiter, heavyOperationLimiter, upload.single('resume'), async (req, res) => {
   let filePath = null;
   
   try {

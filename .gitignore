@@ -5,6 +5,7 @@ node_modules/
 # Environment variables
 .env
 *.env.local
+backend/.env
 
 # Logs
 *.log
@@ -30,6 +31,7 @@ __pycache__/
 venv/
 env/
 ENV/
+resumer_env
 
 # Uploads
 backend/uploads/temp/*
@@ -38,3 +40,5 @@ backend/uploads/temp/*
 # Build outputs
 frontend/dist/
 frontend/build/
+
+#backend

@@ -21,7 +21,8 @@ WEAK_ACTION_VERBS = {
     'assisted', 'tried', 'attempted', 'helped', 'supported'
 }
 
-REQUIRED_SECTIONS = ['experience', 'education', 'skills']
+REQUIRED_SECTIONS = ['experience', 'skills', 'contact']
+CRITICAL_SECTIONS = ['experience', 'skills', 'contact']  # Must have all three for non-zero score
 
 def extract_bullet_points(text):
     """Extract bullet points from resume text"""
@@ -47,22 +48,21 @@ def extract_bullet_points(text):
     return bullets
 
 def has_quantification(text):
-    """Check if text contains numbers/metrics"""
-    # Look for numbers, percentages, dollar amounts, time periods
+    """Enhanced check for quantifiable metrics"""
     patterns = [
         r'\d+%',  # Percentages
-        r'\$[\d,]+',  # Dollar amounts
-        r'\d+[\+]?\s*(years?|months?|weeks?|days?)',  # Time periods
-        r'\d+[\+]?\s*(people|members|users|customers|clients)',  # People counts
-        r'\d+x',  # Multipliers
-        r'\d{1,3}(,\d{3})*',  # Large numbers with commas
-        r'\b\d+\b',  # Any number
+        r'\$[\d,]+',  # Dollar amounts with commas
+        r'\d+\s*(million|thousand|k|m|billion)',  # Large numbers
+        r'\d+\s*(users|customers|clients|projects|people|employees|team members)',  # Count of things
+        r'\d+\s*(years?|months?|weeks?|days?)',  # Time periods
+        r'(increased|decreased|improved|reduced|generated|saved|exceeded).*\d+',  # Improvement metrics
+        r'\d+\s*(hours?|minutes?)',  # Time savings
+        r'\d+x\s*(faster|better|more)',  # Multiplier improvements
+        r'(over|under|within)\s*\d+',  # Comparative metrics
+        r'\d+\s*(awards?|certifications?|patents?)',  # Achievements count
     ]
     
-    for pattern in patterns:
-        if re.search(pattern, text.lower()):
-            return True
-    return False
+    return any(re.search(pattern, text.lower()) for pattern in patterns)
 
 def check_action_verb(text):
     """Check if text starts with a strong action verb"""
@@ -93,9 +93,10 @@ def detect_sections(text):
     sections_missing = []
     
     section_patterns = {
-        'experience': [r'\bexperience\b', r'\bwork history\b', r'\bemployment\b'],
+        'experience': [r'\bexperience\b', r'\bwork history\b', r'\bemployment\b', r'\bwork experience\b', r'\bprofessional experience\b'],
         'education': [r'\beducation\b', r'\bacademic\b', r'\bdegree\b'],
-        'skills': [r'\bskills\b', r'\bcompetencies\b', r'\btechnical skills\b'],
+        'skills': [r'\bskills\b', r'\bcompetencies\b', r'\btechnical skills\b', r'\bcore competencies\b', r'\bprofessional skills\b'],
+        'contact': [r'\bcontact\b', r'\bemail\b', r'\bphone\b', r'\baddress\b', r'\bmobile\b', r'\btel\b', r'@\w+\.\w+', r'\(\d{3}\)', r'\d{3}-\d{3}-\d{4}', r'\+\d+'],
         'summary': [r'\bsummary\b', r'\bobjective\b', r'\bprofile\b'],
         'projects': [r'\bprojects\b', r'\bportfolio\b'],
         'certifications': [r'\bcertifications\b', r'\bcertificates\b']
@@ -108,9 +109,15 @@ def detect_sections(text):
         elif section in REQUIRED_SECTIONS:
             sections_missing.append(section)
     
+    # Check if all critical sections are present
+    critical_sections_missing = [section for section in CRITICAL_SECTIONS if section not in sections_found]
+    has_all_critical_sections = len(critical_sections_missing) == 0
+    
     return {
         'found': sections_found,
-        'missing': sections_missing
+        'missing': sections_missing,
+        'critical_missing': critical_sections_missing,
+        'has_all_critical': has_all_critical_sections
     }
 
 def analyze_bullets(bullets):
@@ -160,6 +167,41 @@ def analyze_bullets(bullets):
                 'type': 'too_long',
                 'message': 'Bullet point is too long. Consider breaking it into multiple points.',
                 'severity': 'low'
+            })
+        
+        # Basic grammar/spelling checks (with very low severity weight)
+        bullet_lower = bullet.lower()
+        
+        # Check for common grammar issues (minimal penalty)
+        grammar_issues = []
+        
+        # Double spaces
+        if '  ' in bullet:
+            grammar_issues.append('Remove extra spaces')
+        
+        # Missing periods at end (if bullet is long enough)
+        if word_count > 8 and not bullet.rstrip().endswith('.'):
+            grammar_issues.append('Consider adding period at end of sentence')
+        
+        # Common typos (very basic check)
+        common_typos = {
+            'recieve': 'receive',
+            'seperate': 'separate', 
+            'occured': 'occurred',
+            'managment': 'management',
+            'sucessful': 'successful'
+        }
+        
+        for typo, correction in common_typos.items():
+            if typo in bullet_lower:
+                grammar_issues.append(f'Possible typo: "{typo}" should be "{correction}"')
+        
+        # Add grammar issues with very low severity (minimal impact on score)
+        for issue in grammar_issues:
+            bullet_analysis['issues'].append({
+                'type': 'grammar_spelling',
+                'message': issue,
+                'severity': 'low'  # Low severity = minimal score impact
             })
         
         analysis.append(bullet_analysis)

@@ -1,0 +1,42 @@
+John Doe
+Software Engineer
+Phone: (555) 123-4567
+Email: john.doe@email.com
+LinkedIn: linkedin.com/in/johndoe
+
+SUMMARY
+Experienced software engineer with 5+ years developing web applications and managing databases. Proven track record of increasing system performance by 40% and reducing deployment time by 60%.
+
+EXPERIENCE
+
+Senior Software Engineer | TechCorp | 2021 - Present
+• Developed and maintained 15+ web applications serving 50,000+ users
+• Implemented microservices architecture reducing response time by 35%
+• Led team of 6 engineers in migrating legacy systems to cloud infrastructure
+• Increased system reliability from 95% to 99.9% uptime
+• Managed $500K budget for infrastructure improvements
+
+Software Developer | StartupInc | 2019 - 2021  
+• Built REST APIs using Python and Node.js handling 1M+ requests daily
+• Optimized database queries reducing load time by 50%
+• Collaborated with team of 12 developers using Agile methodology
+• Deployed applications to AWS reducing operational costs by 30%
+• Mentored 3 junior developers improving team productivity by 25%
+
+SKILLS
+Programming: Python, JavaScript, Java, SQL, HTML, CSS
+Frameworks: React, Node.js, Django, Express.js
+Databases: PostgreSQL, MongoDB, MySQL, Redis  
+Cloud: AWS, Docker, Kubernetes, Jenkins
+Tools: Git, JIRA, Slack, VS Code
+
+EDUCATION
+Bachelor of Science in Computer Science
+State University | 2015 - 2019
+GPA: 3.8/4.0
+
+PROJECTS
+E-commerce Platform
+• Developed full-stack web application with 10,000+ monthly active users
+• Integrated payment gateway processing $100K+ monthly transactions
+• Implemented real-time chat support increasing customer satisfaction by 40%

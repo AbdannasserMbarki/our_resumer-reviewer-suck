@@ -1,5 +1,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
+const fs = require('fs-extra');
+const cacheService = require('./cacheService');
 
 class PythonService {
   constructor() {
@@ -53,10 +55,34 @@ class PythonService {
   }
 
   /**
-   * Parse resume from file
+   * Parse resume from file with caching
    */
   async parseResume(filePath) {
-    return this.executeScript('resume_parser', [filePath]);
+    try {
+      const fileBuffer = await fs.readFile(filePath);
+      const cacheKey = cacheService.generateCacheKey(fileBuffer, 'parse');
+      
+      // Try to get from cache first
+      const cachedResult = await cacheService.get(cacheKey);
+      if (cachedResult) {
+        console.log('Cache hit for resume parsing');
+        return cachedResult;
+      }
+
+      // Execute script if not in cache
+      const result = await this.executeScript('resume_parser', [filePath]);
+      
+      // Cache the result if successful
+      if (result.success) {
+        await cacheService.set(cacheKey, result, 3600); // Cache for 1 hour
+      }
+      
+      return result;
+    } catch (error) {
+      // Fallback to direct execution if caching fails
+      console.warn('Cache operation failed, executing directly:', error.message);
+      return this.executeScript('resume_parser', [filePath]);
+    }
   }
 
   /**
@@ -67,11 +93,34 @@ class PythonService {
   }
 
   /**
-   * Score resume
+   * Score resume with caching
    */
   async scoreResume(filePath, jobDescription = '') {
-    const args = jobDescription ? [filePath, jobDescription] : [filePath];
-    return this.executeScript('resume_scorer', [filePath]);
+    try {
+      const fileBuffer = await fs.readFile(filePath);
+      const cacheKey = cacheService.generateCacheKey(fileBuffer, 'score', jobDescription);
+      
+      // Try to get from cache first
+      const cachedResult = await cacheService.get(cacheKey);
+      if (cachedResult) {
+        console.log('Cache hit for resume scoring');
+        return cachedResult;
+      }
+
+      // Execute script if not in cache
+      const result = await this.executeScript('resume_scorer', [filePath]);
+      
+      // Cache the result if successful
+      if (result.success) {
+        await cacheService.set(cacheKey, result, 1800); // Cache for 30 minutes
+      }
+      
+      return result;
+    } catch (error) {
+      // Fallback to direct execution if caching fails
+      console.warn('Cache operation failed, executing directly:', error.message);
+      return this.executeScript('resume_scorer', [filePath]);
+    }
   }
 
   /**
@@ -82,17 +131,65 @@ class PythonService {
   }
 
   /**
-   * Match resume to job description
+   * Match resume to job description with caching
    */
   async matchJob(resumePath, jobDescription) {
-    return this.executeScript('job_matcher', [resumePath, jobDescription]);
+    try {
+      const fileBuffer = await fs.readFile(resumePath);
+      const cacheKey = cacheService.generateCacheKey(fileBuffer, 'match', jobDescription);
+      
+      // Try to get from cache first
+      const cachedResult = await cacheService.get(cacheKey);
+      if (cachedResult) {
+        console.log('Cache hit for job matching');
+        return cachedResult;
+      }
+
+      // Execute script if not in cache
+      const result = await this.executeScript('job_matcher', [resumePath, jobDescription]);
+      
+      // Cache the result if successful
+      if (result.success) {
+        await cacheService.set(cacheKey, result, 1800); // Cache for 30 minutes
+      }
+      
+      return result;
+    } catch (error) {
+      // Fallback to direct execution if caching fails
+      console.warn('Cache operation failed, executing directly:', error.message);
+      return this.executeScript('job_matcher', [resumePath, jobDescription]);
+    }
   }
 
   /**
-   * Get improvement suggestions
+   * Get improvement suggestions with caching
    */
   async improveResume(filePath) {
-    return this.executeScript('text_improver', [filePath]);
+    try {
+      const fileBuffer = await fs.readFile(filePath);
+      const cacheKey = cacheService.generateCacheKey(fileBuffer, 'improve');
+      
+      // Try to get from cache first
+      const cachedResult = await cacheService.get(cacheKey);
+      if (cachedResult) {
+        console.log('Cache hit for resume improvement');
+        return cachedResult;
+      }
+
+      // Execute script if not in cache
+      const result = await this.executeScript('text_improver', [filePath]);
+      
+      // Cache the result if successful
+      if (result.success) {
+        await cacheService.set(cacheKey, result, 1800); // Cache for 30 minutes
+      }
+      
+      return result;
+    } catch (error) {
+      // Fallback to direct execution if caching fails
+      console.warn('Cache operation failed, executing directly:', error.message);
+      return this.executeScript('text_improver', [filePath]);
+    }
   }
 }
 

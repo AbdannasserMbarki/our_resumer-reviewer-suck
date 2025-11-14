@@ -90,12 +90,27 @@ A comprehensive web platform that analyzes and improves resumes using NLP and ma
 5. **Configure Environment Variables**
    
    Create a `.env` file in the `backend` directory:
+   ```bash
+   cd backend
+   cp .env.example .env
+   # Edit .env with your specific configuration
+   ```
+   
+   **Minimum required configuration:**
    ```env
    PORT=5000
    NODE_ENV=development
    PYTHON_PATH=python
-   MAX_FILE_SIZE=2097152
-   ALLOWED_FILE_TYPES=pdf,docx
+   ```
+   
+   **Optional services (for enhanced features):**
+   ```env
+   # Redis (for caching - improves performance)
+   REDIS_HOST=localhost
+   REDIS_PORT=6379
+   
+   # PostgreSQL (for analytics and usage tracking)
+   DATABASE_URL=postgresql://user:password@localhost:5432/resume_reviewer
    ```
 
 ## Running the Application
@@ -264,6 +279,32 @@ npm start
 - PDFs must be text-based (not scanned images)
 - Some complex layouts may not parse correctly
 - Try exporting from Word/Google Docs for best results
+
+### Performance Issues
+- **Enable Redis**: Install Redis for significant performance improvements
+- **Check Logs**: Review logs in `backend/logs/` for detailed error information
+- **Monitor Health**: Use `/api/health` endpoint to check service status
+
+## Enhanced Features
+
+This platform includes several production-ready enhancements:
+
+### 🚀 **Performance Features**
+- **Redis Caching**: Dramatically improves response times for repeated analyses
+- **Rate Limiting**: Protects against abuse and ensures fair usage
+- **Structured Logging**: Comprehensive logging for debugging and monitoring
+
+### 📊 **Analytics & Monitoring**
+- **Health Checks**: Comprehensive service monitoring at `/api/health`
+- **Usage Analytics**: Optional PostgreSQL integration for usage tracking
+- **Performance Metrics**: Detailed timing and performance data
+
+### 🔒 **Production Ready**
+- **Error Handling**: Graceful fallbacks when optional services are unavailable
+- **Security**: Rate limiting and input validation
+- **Scalability**: Designed for horizontal scaling
+
+For detailed information about these enhancements, see [ENHANCEMENTS.md](./ENHANCEMENTS.md).
 
 ## Contributing
 

@@ -16,7 +16,13 @@
     "multer": "^1.4.5-lts.1",
     "dotenv": "^16.3.1",
     "fs-extra": "^11.1.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "redis": "^4.6.10",
+    "express-rate-limit": "^7.1.5",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

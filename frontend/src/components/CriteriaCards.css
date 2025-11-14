@@ -1,0 +1,281 @@
+/* Criteria Cards Styles */
+.criteria-cards {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.criteria-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.criteria-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #1f2937;
+  font-size: 1.5rem;
+}
+
+.criteria-subtitle {
+  margin: 0;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* Grid Layout */
+.criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Individual Criterion Card */
+.criterion-card {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #e2e8f0; /* Will be overridden by score color */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.criterion-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Header */
+.criterion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.criterion-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.criterion-icon {
+  color: #6b7280;
+}
+
+.criterion-title h3 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.criterion-score {
+  flex-shrink: 0;
+}
+
+.score-circle {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.score-number {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.score-max {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  line-height: 1;
+}
+
+/* Card Content */
+.criterion-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.score-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.status-label {
+  font-size: 0.9rem;
+}
+
+.criterion-description p {
+  margin: 0;
+  color: #374151;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* Progress Bar */
+.score-progress {
+  margin-top: 0.5rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease-in-out;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+/* Summary Section */
+.criteria-summary {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e5e7eb;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.next-steps h4 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+  font-size: 1.1rem;
+}
+
+.next-steps ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.priority-action {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.priority-action strong {
+  color: #dc2626;
+}
+
+.no-critical-issues {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  padding: 0.75rem;
+  color: #059669;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .criteria-cards {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .criteria-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .criterion-card {
+    padding: 1rem;
+  }
+  
+  .criterion-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .criteria-summary {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .summary-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .score-circle {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .score-number {
+    font-size: 1.25rem;
+  }
+  
+  .score-max {
+    font-size: 0.7rem;
+  }
+}

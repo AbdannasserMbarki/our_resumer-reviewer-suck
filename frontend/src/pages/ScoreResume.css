@@ -36,3 +36,277 @@
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
 }
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+/* Performance Tier Styles */
+.performance-tier {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.tier-description {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.tier-advice {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* Detailed Analysis Styles */
+.analysis-section {
+  margin-bottom: 2rem;
+}
+
+.analysis-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.analysis-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.analysis-section li {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.strengths h3 {
+  color: #22c55e;
+}
+
+.strength-item {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+  border-left: 3px solid #22c55e;
+}
+
+.improvements h3 {
+  color: #f59e0b;
+}
+
+.improvement-item {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+  border-left: 3px solid #f59e0b;
+}
+
+.suggestions h3 {
+  color: #3b82f6;
+}
+
+.suggestion-item {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-left: 3px solid #3b82f6;
+}
+
+.industry h3 {
+  color: #8b5cf6;
+}
+
+.analysis-section.industry {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid #8b5cf6;
+}
+
+.analysis-section.industry p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.analysis-section.industry ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.analysis-section.industry li {
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  margin: 0;
+}
+
+/* Professional Recommendations Section */
+.recommendations-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.recommendations-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.recommendations-header h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.recommendations-header p {
+  color: #64748b;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.recommendation-category {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recommendation-category:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.recommendation-category.critical {
+  border-left-color: #ef4444;
+}
+
+.recommendation-category.high {
+  border-left-color: #f59e0b;
+}
+
+.recommendation-category.medium {
+  border-left-color: #3b82f6;
+}
+
+.recommendation-category.good {
+  border-left-color: #10b981;
+}
+
+.recommendation-category h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.recommendation-category.critical h3 {
+  color: #ef4444;
+}
+
+.recommendation-category.high h3 {
+  color: #f59e0b;
+}
+
+.recommendation-category.medium h3 {
+  color: #3b82f6;
+}
+
+.recommendation-category.good h3 {
+  color: #10b981;
+}
+
+.recommendation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.recommendation-item {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.recommendation-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.recommendation-item h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.recommendation-item p {
+  margin: 0 0 0.75rem 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.examples {
+  background: #f8fafc;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border-left: 3px solid #e2e8f0;
+  font-size: 0.85rem;
+}
+
+.examples strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+.examples ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.2rem;
+}
+
+.examples li {
+  margin-bottom: 0.25rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Responsive Design for Recommendations */
+@media (max-width: 768px) {
+  .recommendations-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+  }
+  
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .recommendation-category {
+    padding: 1rem;
+  }
+  
+  .recommendations-header h2 {
+    font-size: 1.3rem;
+  }
+}

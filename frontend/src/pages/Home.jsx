@@ -24,7 +24,7 @@ function Home() {
             Get a comprehensive score based on ATS compatibility, content quality,
             keyword optimization, and structure.
           </p>
-          <Link to="/score" className="feature-link">
+          <Link to="/score-resume" className="feature-link">
             Score Resume →
           </Link>
         </div>
@@ -52,7 +52,7 @@ function Home() {
             Get line-by-line suggestions to improve your bullet points with
             stronger action verbs and quantifiable metrics.
           </p>
-          <Link to="/score" className="feature-link">
+          <Link to="/score-resume" className="feature-link">
             Get Started →
           </Link>
         </div>
@@ -61,7 +61,7 @@ function Home() {
       <div className="cta-section">
         <h2>Ready to improve your resume?</h2>
         <p>Start with a free resume analysis and get actionable feedback in seconds.</p>
-        <Link to="/score" className="cta-button">
+        <Link to="/score-resume" className="cta-button">
           Analyze My Resume
         </Link>
       </div>
